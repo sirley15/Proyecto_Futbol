@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Navbar, Nav, NavDropdown} from "react-bootstrap";
+import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Navbars: React.FC = () => {
@@ -8,20 +8,20 @@ const Navbars: React.FC = () => {
 
   const ocultarNavbar = location.pathname === "/" || location.pathname === "/registro";
 
-  const [correo, setCorreo] = useState("");
+  const [nombre, setNombre] = useState("");
 
   useEffect(() => {
-  const storedCorreo = localStorage.getItem("correo");
-  if (storedCorreo) {
-    setCorreo(storedCorreo);
-  } else {
-    setCorreo(""); 
-  }
-}, [location]); 
-
+    const storedNombre = localStorage.getItem("nombre");
+    if (storedNombre) {
+      setNombre(storedNombre);
+    } else {
+      setNombre("");
+    }
+  }, [location]);
 
   const logout = () => {
     localStorage.removeItem("correo");
+    localStorage.removeItem("nombre");
     localStorage.removeItem("auth");
     navigate("/");
   };
@@ -29,8 +29,9 @@ const Navbars: React.FC = () => {
   if (ocultarNavbar) {
     return null;
   }
-return (
-    <Navbar expand="lg" variant="dark" bg="success" className="shadow-lg py-3">
+
+  return (
+    <Navbar expand="lg" variant="dark" bg="dark" className="shadow-lg py-3">
       <Container>
         <Navbar.Brand as={Link} to="/" className="fw-bold text-white fs-4">
           ⚽ ORG DEPORTIVA
@@ -66,9 +67,10 @@ return (
               <NavDropdown.Item as={Link} to="/actualizar/presidentes">🔄 Actualizar Presidentes</NavDropdown.Item>
             </NavDropdown>
 
-            {correo && <span className="text-white fw-medium">{correo}</span>}
-            <button 
-              onClick={logout} 
+            {nombre && <span className="text-white fw-medium">🎉 {nombre}</span>}
+
+            <button
+              onClick={logout}
               className="btn btn-outline-light btn-sm ms-2"
             >
               Cerrar sesión

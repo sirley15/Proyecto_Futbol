@@ -28,7 +28,7 @@ export default class UsuariosController{
 
     const valido = await hash.verify(user.password, password);
     if (valido) {
-      return response.json({ mensaje: 'bienvenido' });
+      return response.json({ mensaje: 'bienvenido', nombre: user.nombre_completo });
     } else {
       return response.json({ mensaje: 'error email o password incorrectos' });
     }

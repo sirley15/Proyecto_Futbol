@@ -19,6 +19,7 @@ const Login: React.FC = () => {
 
     if (data.mensaje === "bienvenido") {
       localStorage.setItem("correo", correo);
+      localStorage.setItem("nombre", data.nombre);
       navigate("/crear/equipos");
     } else {
       alert("Error al iniciar sesión: correo o contraseña incorrectos");
